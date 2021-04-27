@@ -9,14 +9,14 @@ import java.io.Writer;
  */
 public class Base64 {
 
-    private static final char S_BASE64CHAR[] = {'A', 'B', 'C', 'D', 'E', 'F',
+    private static final char[] S_BASE64CHAR = {'A', 'B', 'C', 'D', 'E', 'F',
             'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
             'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
             'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
             't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5',
             '6', '7', '8', '9', '+', '/'};
 
-    private static final byte S_DECODETABLE[];
+    private static final byte[] S_DECODETABLE;
 
     static {
         S_DECODETABLE = new byte[128];
@@ -34,7 +34,7 @@ public class Base64 {
      * @param wp
      * @return
      */
-    private static int decode0(char ibuf[], byte obuf[], int wp) {
+    private static int decode0(char[] ibuf, byte[] obuf, int wp) {
         int outlen = 3;
         if (ibuf[3] == '=')
             outlen = 2;
@@ -69,10 +69,10 @@ public class Base64 {
      * @param len
      * @return
      */
-    public static byte[] decode(char data[], int off, int len) {
-        char ibuf[] = new char[4];
+    public static byte[] decode(char[] data, int off, int len) {
+        char[] ibuf = new char[4];
         int ibufcount = 0;
-        byte obuf[] = new byte[(len / 4) * 3 + 3];
+        byte[] obuf = new byte[(len / 4) * 3 + 3];
         int obufcount = 0;
         for (int i = off; i < off + len; i++) {
             char ch = data[i];
@@ -89,7 +89,7 @@ public class Base64 {
         if (obufcount == obuf.length) {
             return obuf;
         } else {
-            byte ret[] = new byte[obufcount];
+            byte[] ret = new byte[obufcount];
             System.arraycopy(obuf, 0, ret, 0, obufcount);
             return ret;
         }
@@ -100,9 +100,9 @@ public class Base64 {
      * @return
      */
     public static byte[] decode(String data) {
-        char ibuf[] = new char[4];
+        char[] ibuf = new char[4];
         int ibufcount = 0;
-        byte obuf[] = new byte[(data.length() / 4) * 3 + 3];
+        byte[] obuf = new byte[(data.length() / 4) * 3 + 3];
         int obufcount = 0;
         for (int i = 0; i < data.length(); i++) {
             char ch = data.charAt(i);
@@ -119,7 +119,7 @@ public class Base64 {
         if (obufcount == obuf.length) {
             return obuf;
         } else {
-            byte ret[] = new byte[obufcount];
+            byte[] ret = new byte[obufcount];
             System.arraycopy(obuf, 0, ret, 0, obufcount);
             return ret;
         }
@@ -132,11 +132,11 @@ public class Base64 {
      * @param ostream
      * @throws IOException
      */
-    public static void decode(char data[], int off, int len,
+    public static void decode(char[] data, int off, int len,
                               OutputStream ostream) throws IOException {
-        char ibuf[] = new char[4];
+        char[] ibuf = new char[4];
         int ibufcount = 0;
-        byte obuf[] = new byte[3];
+        byte[] obuf = new byte[3];
         for (int i = off; i < off + len; i++) {
             char ch = data[i];
             if (ch != '='
@@ -159,9 +159,9 @@ public class Base64 {
      */
     public static void decode(String data, OutputStream ostream)
             throws IOException {
-        char ibuf[] = new char[4];
+        char[] ibuf = new char[4];
         int ibufcount = 0;
-        byte obuf[] = new byte[3];
+        byte[] obuf = new byte[3];
         for (int i = 0; i < data.length(); i++) {
             char ch = data.charAt(i);
             if (ch != '='
@@ -181,7 +181,7 @@ public class Base64 {
      * @param data
      * @return
      */
-    public static String encode(byte data[]) {
+    public static String encode(byte[] data) {
         return encode(data, 0, data.length);
     }
 
@@ -191,10 +191,10 @@ public class Base64 {
      * @param len
      * @return
      */
-    public static String encode(byte data[], int off, int len) {
+    public static String encode(byte[] data, int off, int len) {
         if (len <= 0)
             return "";
-        char out[] = new char[(len / 3) * 4 + 4];
+        char[] out = new char[(len / 3) * 4 + 4];
         int rindex = off;
         int windex = 0;
         int rest;
@@ -232,11 +232,11 @@ public class Base64 {
      * @param ostream
      * @throws IOException
      */
-    public static void encode(byte data[], int off, int len,
+    public static void encode(byte[] data, int off, int len,
                               OutputStream ostream) throws IOException {
         if (len <= 0)
             return;
-        byte out[] = new byte[4];
+        byte[] out = new byte[4];
         int rindex = off;
         int rest;
         for (rest = len - off; rest >= 3; rest -= 3) {
@@ -275,11 +275,11 @@ public class Base64 {
      * @param writer
      * @throws IOException
      */
-    public static void encode(byte data[], int off, int len, Writer writer)
+    public static void encode(byte[] data, int off, int len, Writer writer)
             throws IOException {
         if (len <= 0)
             return;
-        char out[] = new char[4];
+        char[] out = new char[4];
         int rindex = off;
         int rest = len - off;
         int output = 0;
