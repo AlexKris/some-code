@@ -3,7 +3,7 @@ package com.chris.some.code.y2018.m09.d14;
 /**
  * 无序数组
  *
- * @author Alex
+ * @author chris
  */
 public class Array {
 

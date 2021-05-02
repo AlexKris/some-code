@@ -1,6 +1,7 @@
 package com.chris.some.code.y2019.m06.d03.stream;
 
 public class PersonModel {
+
     private String name;
     private int age;
     private String sex;

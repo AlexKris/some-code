@@ -3,6 +3,7 @@ package com.chris.some.code.y2018.m12.d28;
 import java.io.Serializable;
 
 public class People implements Serializable {
+
     private static final long serialVersionUID = 2142190371710042006L;
     private String name;
     private int age;

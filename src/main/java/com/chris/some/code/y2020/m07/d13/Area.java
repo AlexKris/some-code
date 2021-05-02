@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class Area implements Serializable {
+
     private static final long serialVersionUID = 3531270940442345190L;
     private String areaCode;
     private String areaName;

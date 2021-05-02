@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Data {
+
     private static List<PersonModel> list = null;
 
     static {

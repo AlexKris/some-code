@@ -63,5 +63,4 @@ public enum RankClassificationEnum {
     public void setCode(String code) {
         this.code = code;
     }
-
 }

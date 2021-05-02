@@ -1,6 +1,7 @@
 package com.chris.some.code.y2019.m05.d28;
 
 public class T {
+
     private int id;
 
     public int getId() {

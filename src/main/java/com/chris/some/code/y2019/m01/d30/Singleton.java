@@ -1,6 +1,7 @@
 package com.chris.some.code.y2019.m01.d30;
 
 public class Singleton {
+
     /**
      * 声明为 private 避免调用默认构造方法创建对象
      */

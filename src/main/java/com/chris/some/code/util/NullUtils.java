@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 判空工具类
  *
- * @author Chris
+ * @author chris
  */
 public class NullUtils {
 
