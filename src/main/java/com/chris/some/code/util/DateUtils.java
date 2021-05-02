@@ -8,10 +8,10 @@ import java.util.*;
 /**
  * 日期工具类
  *
- * @author 高瑞廷
- * @date 2019-08-02
+ * @author chris
  */
 public class DateUtils {
+
     /**
      * 日期时间格式:2019-08-02 15:43:10
      */
@@ -84,10 +84,6 @@ public class DateUtils {
 
     /**
      * 日期格式化yyyy-MM-dd
-     *
-     * @param format
-     * @param date
-     * @return
      */
     public static Date formatDate(String date, String format) {
         try {
@@ -126,7 +122,7 @@ public class DateUtils {
             format = "yyyy-MM-dd HH:mm:ss";
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
-        return sdf.format(new Date(Long.valueOf(seconds + "000")));
+        return sdf.format(new Date(Long.parseLong(seconds + "000")));
     }
 
     /**
@@ -153,7 +149,7 @@ public class DateUtils {
      * 获取当前月往前12个月的年月
      */
     public static String[] getYearMonthList() {
-        String[] dateList = new String[]{
+        return new String[]{
                 getYearMonthStr(getLastMonthDataOfCurrent(1)),
                 getYearMonthStr(getLastMonthDataOfCurrent(2)),
                 getYearMonthStr(getLastMonthDataOfCurrent(3)),
@@ -167,8 +163,6 @@ public class DateUtils {
                 getYearMonthStr(getLastMonthDataOfCurrent(11)),
                 getYearMonthStr(getLastMonthDataOfCurrent(12)),
         };
-
-        return dateList;
     }
 
     /**
@@ -463,8 +457,7 @@ public class DateUtils {
         rightNow.setTime(date);
         rightNow.add(Calendar.MONTH, addMonth);
         Date dt1 = rightNow.getTime();
-        String reStr = sdf.format(dt1);
-        return reStr;
+        return sdf.format(dt1);
     }
 
     /**
@@ -489,18 +482,17 @@ public class DateUtils {
      */
     public static String getBeforeData(Date now, int num, String dateFormat) {
         Date bDate = new Date();
-        //得到日历
+        // 得到日历
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(now);
-        //设置为前一天
+        // 设置为前一天
         calendar.add(Calendar.DAY_OF_MONTH, num);
-        //得到前一天的时间
+        // 得到前一天的时间
         bDate = calendar.getTime();
-        //设置时间格式
+        // 设置时间格式
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        //格式化前一天
-        String defaultStartDate = sdf.format(bDate);
-        return defaultStartDate;
+        // 格式化前一天
+        return sdf.format(bDate);
     }
 
     /**
@@ -511,18 +503,17 @@ public class DateUtils {
      */
     public static String getBeforeOneDate(String dateFormat) {
         Date bDate = new Date();
-        //得到日历
+        // 得到日历
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(bDate);
-        //设置为前一天
+        // 设置为前一天
         calendar.add(Calendar.DAY_OF_MONTH, 1);
-        //得到前一天的时间
+        // 得到前一天的时间
         bDate = calendar.getTime();
-        //设置时间格式
+        // 设置时间格式
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        //格式化前一天
-        String defaultStartDate = sdf.format(bDate);
-        return defaultStartDate;
+        // 格式化前一天
+        return sdf.format(bDate);
     }
 
 
@@ -663,16 +654,16 @@ public class DateUtils {
         }
         String[] startArr = startDate.split("-");
         String[] endArr = endDate.split("-");
-        //起始年份
+        // 起始年份
         Integer startYear = Integer.valueOf(startArr[0]);
-        //结束年份
+        // 结束年份
         Integer endYear = Integer.valueOf(endArr[0]);
-        //其实月份
+        // 其实月份
         Integer startMonth = Integer.valueOf(startArr[1]);
-        //结束月份
-        Integer endMonth = Integer.valueOf(endArr[1]);
+        // 结束月份
+        int endMonth = Integer.parseInt(endArr[1]);
         TreeMap<String, Map<String, String>> dateMap = new TreeMap<>();
-        //选择年份是同一年
+        // 选择年份是同一年
         if (startYear.equals(endYear)) {
             for (int i = startMonth; i <= endMonth; i++) {
                 Map<String, String> valueMap = new HashMap<>();
@@ -681,8 +672,8 @@ public class DateUtils {
                 dateMap.put(startYear + "" + "年" + String.format("%02d", i) + "月", valueMap);
             }
         } else {
-            //选择年份是不同年份
-            for (; startMonth <= 12; ) {
+            // 选择年份是不同年份
+            while (startMonth <= 12) {
                 Map<String, String> valueMap = new HashMap<>();
                 valueMap.put("year", startArr[0]);
                 valueMap.put("month", String.valueOf(startMonth));

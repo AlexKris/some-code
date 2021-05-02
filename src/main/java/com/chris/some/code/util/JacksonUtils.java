@@ -11,11 +11,11 @@ import java.util.Map;
 /**
  * jackson工具类
  *
- * @author gaoruiting
- * @date 2020-05-06 17:15
+ * @author chris
  */
 @Slf4j
 public class JacksonUtils {
+
     private JacksonUtils() {
     }
 

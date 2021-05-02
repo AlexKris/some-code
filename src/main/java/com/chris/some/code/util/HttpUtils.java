@@ -9,9 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class HttpUtils {
-    /**
-     * post 请求
-     */
+
+    // post 请求
     public static String sendPost(String url, String param) {
         PrintWriter out = null;
         BufferedReader in = null;
@@ -45,9 +44,8 @@ public class HttpUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        //使用finally块来关闭输出流、输入流
-        finally {
+        } finally {
+            // 使用finally块来关闭输出流、输入流
             try {
                 if (out != null) {
                     out.close();

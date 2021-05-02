@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * MD5加密
+ * MD5加密工具类
  */
 public class MD5 {
 
@@ -40,11 +40,11 @@ public class MD5 {
      * @return
      */
     private static String byteToString(byte[] bByte) {
-        StringBuffer sBuffer = new StringBuffer();
-        for (int i = 0; i < bByte.length; i++) {
-            sBuffer.append(byteToArrayString(bByte[i]));
+        StringBuilder buf = new StringBuilder();
+        for (byte b : bByte) {
+            buf.append(byteToArrayString(b));
         }
-        return sBuffer.toString();
+        return buf.toString();
     }
 
     public static String getMD5Code(String strObj) {
@@ -73,7 +73,7 @@ public class MD5 {
         bts = text.getBytes(StandardCharsets.UTF_8);
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] bts_hash = md.digest(bts);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (byte b : bts_hash) {
             buf.append(String.format("%02X", b & 0xff));
         }
@@ -87,20 +87,16 @@ public class MD5 {
      * @return
      */
     public static String formatUrlMapASC(Map<String, String> params) {
-        StringBuffer valueSb = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         // 将参数以参数名的字典升序排序
         Map<String, String> sortParams = new TreeMap<>(params);
-        Set<Map.Entry<String, String>> entrys = sortParams.entrySet();
+        Set<Map.Entry<String, String>> entries = sortParams.entrySet();
         // 遍历排序的字典,并拼接格式
-        for (Map.Entry<String, String> entry : entrys) {
-            if (NullUtils.isNullOrEmpty(entry.getValue())) {
-                continue;
-            } else {
-                valueSb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
-            }
+        for (Map.Entry<String, String> entry : entries) {
+            if (!NullUtils.isNullOrEmpty(entry.getValue()))
+                buf.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
-        valueSb.deleteCharAt(valueSb.length() - 1);//删除最后一个"&"
-        return valueSb.toString();
+        buf.deleteCharAt(buf.length() - 1); // 删除最后一个"&"
+        return buf.toString();
     }
-
 }

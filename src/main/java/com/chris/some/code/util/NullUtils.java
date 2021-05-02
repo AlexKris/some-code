@@ -24,8 +24,8 @@ public class NullUtils {
             if (object.length == 0) return true;
 
             boolean empty = true;
-            for (int i = 0; i < object.length; i++) {
-                if (!isNullOrEmpty(object[i])) {
+            for (Object o : object) {
+                if (!isNullOrEmpty(o)) {
                     empty = false;
                     break;
                 }
@@ -34,5 +34,4 @@ public class NullUtils {
         }
         return false;
     }
-
 }

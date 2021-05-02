@@ -1,13 +1,13 @@
 package com.chris.some.code.y2019.m05.d13;
 
-import com.chris.some.code.util.DesEncrypter;
+import com.chris.some.code.util.DesUtils;
 
 public class SpecialCharTest {
 
     public static void main(String[] args) {
         try {
-            DesEncrypter desEncrypter = new DesEncrypter("admin");
-            String password = desEncrypter.encrypt("123456");
+            DesUtils desUtils = new DesUtils("admin");
+            String password = desUtils.encrypt("123456");
             System.out.println(password);
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,9 +11,10 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-public class DesEncrypter {
-    Cipher ecipher;
-    Cipher dcipher;
+public class DesUtils {
+
+    Cipher enCipher;
+    Cipher deCipher;
     byte[] salt = {(byte) 0xA9, (byte) 0x9B, (byte) 0xC8, (byte) 0x32, (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03};
 
     /**
@@ -26,18 +27,18 @@ public class DesEncrypter {
      * @throws InvalidAlgorithmParameterException
      * @throws InvalidKeyException
      */
-    public DesEncrypter(String apiKey) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
+    public DesUtils(String apiKey) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
         // 设置算法为md5和DES加解密
         int iterationCount = 2;
         KeySpec keySpec = new PBEKeySpec(apiKey.toCharArray(), salt, iterationCount);
         SecretKey key = SecretKeyFactory.getInstance("PBEWithMD5AndDES").generateSecret(keySpec);
-        ecipher = Cipher.getInstance(key.getAlgorithm());
-        dcipher = Cipher.getInstance(key.getAlgorithm());
+        enCipher = Cipher.getInstance(key.getAlgorithm());
+        deCipher = Cipher.getInstance(key.getAlgorithm());
         AlgorithmParameterSpec paramSpec = new PBEParameterSpec(salt, iterationCount);
-        //初始化加密算法对象
-        ecipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
-        //初始化解密算法对象
-        dcipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
+        // 初始化加密算法对象
+        enCipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
+        // 初始化解密算法对象
+        deCipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
     }
 
     /**
@@ -49,9 +50,9 @@ public class DesEncrypter {
      * @throws IllegalBlockSizeException
      */
     public String encrypt(String str) throws BadPaddingException, IllegalBlockSizeException {
-        //设置编码utf-8
+        // 设置编码utf-8
         str = new String(str.getBytes(), StandardCharsets.UTF_8);
-        return Base64.encode(ecipher.doFinal(str.getBytes()));
+        return Base64.encode(enCipher.doFinal(str.getBytes()));
     }
 
     /**
@@ -63,12 +64,12 @@ public class DesEncrypter {
      * @throws IllegalBlockSizeException
      */
     public String decrypt(String str) throws BadPaddingException, IllegalBlockSizeException {
-        return new String(dcipher.doFinal(Base64.decode(str)), StandardCharsets.UTF_8);
+        return new String(deCipher.doFinal(Base64.decode(str)), StandardCharsets.UTF_8);
     }
 
     public static void main(String[] args) throws Exception {
         String apiKey = "12345678";
-        DesEncrypter des = new DesEncrypter(apiKey);
+        DesUtils des = new DesUtils(apiKey);
         System.out.println(des.decrypt("GPYmzr7oWTeL5nj415+POkCJ6V+YZbdZ"));
     }
 }
