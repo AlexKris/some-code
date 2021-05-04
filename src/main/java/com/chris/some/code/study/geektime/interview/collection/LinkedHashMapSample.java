@@ -1,14 +1,14 @@
-package com.chris.some.code.study.geektime.interview.col;
+package com.chris.some.code.study.geektime.interview.collection;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * 使用 LinkedHashMap 构建空间敏感的资源池
- * <p>
- * {@link java.util.LinkedHashMap}
  *
  * @author chris
+ * @see java.util.LinkedHashMap
+ * @since 1.0
  */
 public class LinkedHashMapSample {
 
