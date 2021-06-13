@@ -1,5 +1,8 @@
 package com.chris.some.code.study.effectivejava.article2;
 
+/**
+ * 2、当构造方法参数过多时使用 builder 模式
+ */
 public class TestBuilder {
     public static void main(String[] args) {
         NutritionFacts cocaCola =
