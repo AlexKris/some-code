@@ -1,4 +1,4 @@
-package com.chris.some.code.study.geektime.datastructureandalgorithm.datastructure;
+package com.chris.some.code.study.geektime.datastructureandalgorithm.datastructure.array;
 
 /**
  * 数组
