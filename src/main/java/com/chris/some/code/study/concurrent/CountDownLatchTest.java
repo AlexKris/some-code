@@ -2,6 +2,18 @@ package com.chris.some.code.study.concurrent;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * {@link CountDownLatch}
+ * 闭锁，让一组线程等待其他线程完成工作后才执行
+ * <pre>
+ *     new CountDownLatch(int count)，构造函数，传入int参数为扣减次数
+ *     await，等待方法，带参数的为超时方法
+ *     countDown，扣减count，每次扣减1
+ *     getCount，获取当前count值
+ * </pre>
+ *
+ * @author grt
+ */
 public class CountDownLatchTest {
 
     /**
