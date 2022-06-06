@@ -6,7 +6,8 @@ import java.util.concurrent.CountDownLatch;
  * {@link CountDownLatch}
  * 闭锁，让一组线程等待其他线程完成工作后才执行
  * <pre>
- *     new CountDownLatch(int count)，构造函数，传入int参数为扣减次数
+ *     new CountDownLatch(int count)，构造函数，参数count为扣减次数
+ *     count可以大于等于线程个数，因为由第三方控制，可以扣减多次
  *     await，等待方法，带参数的为超时方法
  *     countDown，扣减count，每次扣减1
  *     getCount，获取当前count值
@@ -55,20 +56,17 @@ public class CountDownLatchTest {
     public static void main(String[] args) {
 
         // 创建单独的初始化线程
-        new Thread() {
-            @Override
-            public void run() {
-                SleepTools.milliSecond(1);
-                System.out.println("thread_" + Thread.currentThread().getId() + " ready init work step 1st ...");
-                // 扣减一次
-                countDownLatch.countDown();
-                System.out.println("begin stop 2nd ...");
-                SleepTools.milliSecond(1);
-                System.out.println("thread_" + Thread.currentThread().getId() + " ready init work step 2nd ...");
-                // 扣减一次
-                countDownLatch.countDown();
-            }
-        }.start();
+        new Thread(() -> {
+            SleepTools.milliSecond(1);
+            System.out.println("thread_" + Thread.currentThread().getId() + " ready init work step 1st ...");
+            // 扣减一次
+            countDownLatch.countDown();
+            System.out.println("begin stop 2nd ...");
+            SleepTools.milliSecond(1);
+            System.out.println("thread_" + Thread.currentThread().getId() + " ready init work step 2nd ...");
+            // 扣减一次
+            countDownLatch.countDown();
+        }).start();
 
         // 启动业务线程
         new Thread(new BizThread()).start();
