@@ -1,4 +1,4 @@
-package com.chris.some.code.study.concurrent;
+package com.chris.some.code.study.juc;
 
 import java.util.concurrent.CountDownLatch;
 
