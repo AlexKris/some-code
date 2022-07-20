@@ -3,11 +3,12 @@ package com.chris.some.code.study.onjava.enums.customize;
 public enum OzWitch {
     // 实例必须在方法之前定义
     WEST("Miss Gulch, aka the Wicked Witch of the West"),
-    NORTH("Clinda, the Good Witch of the North"),
-    EAST("Wicked Witch of the East, wearer of the Ruby Slippers, crushed by Dorothy', house"),
+    NORTH("Glinda, the Good Witch of the North"),
+    EAST("Wicked Witch of the East, wearer of the Ruby Slippers, crushed by Dorothy's house"),
+    SOUTH("Good by inference, but missing"),
     ;
 
-    private String description;
+    private final String description;
 
     // 构造器的访问权限必须是包级或 private
     private OzWitch(String description) {
