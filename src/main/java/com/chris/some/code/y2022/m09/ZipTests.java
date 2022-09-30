@@ -10,6 +10,13 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * 测试zip解压
+ *
+ * @author grt
+ * @version 1.0
+ * @since 2022-09-30 11:31:19
+ */
 public class ZipTests {
 
     private static final String ZIP_FILE_PATH = "/Users/alex/Downloads";
@@ -22,23 +29,43 @@ public class ZipTests {
             System.out.println("[main] 文件不存在");
             return;
         }
-//        unzipFileAllByHt(zipFile, false);
+        unzipFileByHt(zipFile, false);
         unzipFileByJava(zipFile);
     }
 
-    public static void unzipFileAllByHt(File zipFile, boolean deleteFlag) {
-        unzipFileByHt(zipFile, deleteFlag);
+    public static void writeFile() {
+        File readFile = new File(ZIP_FILE_PATH + File.separator + "车型库同步ftp信息.txt");
+        File file = new File(ZIP_FILE_PATH + File.separator + "folder/create/test.txt");
+        try (FileInputStream fileInputStream = new FileInputStream(readFile);
+             FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+            int readLength;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((readLength = fileInputStream.read(buffer, 0, BUFFER_SIZE)) != -1) {
+                fileOutputStream.write(buffer, 0, readLength);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    /**
+     * 解压zip文件以及解压文件中的zip文件，
+     *
+     * @param zipFile    zip文件
+     * @param deleteFlag 是否删除zip文件，true：删除，false：不删除。是否删除不影响解压
+     */
     public static void unzipFileByHt(File zipFile, boolean deleteFlag) {
-        File file = unzipFileByHt(zipFile);
+        File file = ZipUtil.unzip(zipFile);
         if (deleteFlag) {
+            // 是否删除zip文件
             boolean delete = zipFile.delete();
-            System.out.println("[unzipFileByHt] file = " + file + " delete = " + delete);
+            System.out.println("[unzipFileByHt] file = " + zipFile.getPath() + " delete = " + delete);
         }
         if (file.isDirectory()) {
+            // 目录
             File[] files = file.listFiles();
             if (null == files) {
+                // 目录下无文件
                 return;
             }
             for (File fileIn : files) {
@@ -46,21 +73,18 @@ public class ZipTests {
                 String fileInName = fileIn.getName();
                 if (fileInName.endsWith(".zip")) {
                     System.out.println("[unzipFileByHt] fileInName = " + fileInName);
-                    unzipFileByHt(fileIn, true);
+                    // 递归，解压所有zip文件
+                    unzipFileByHt(fileIn, false);
                 }
             }
         }
     }
 
-    public static File unzipFileByHt(File zipFile) {
-        return ZipUtil.unzip(zipFile);
-    }
-
     public static void unzipFileByJava(File zipFile) {
         String path = zipFile.getParent();
-        System.out.println("[main] path = " + path);
+        System.out.println("[unzipFileByJava] path = " + path);
         String name = zipFile.getName();
-        System.out.println("[main] name = " + name);
+        System.out.println("[unzipFileByJava] name = " + name);
         unzipFileAll(zipFile, path + File.separator + name.substring(0, name.lastIndexOf(".")), false);
     }
 
@@ -138,7 +162,7 @@ public class ZipTests {
      */
     public static void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
         try (OutputStream outputStream = Files.newOutputStream(Paths.get(filePath));
-             BufferedOutputStream bos = new BufferedOutputStream(outputStream);) {
+             BufferedOutputStream bos = new BufferedOutputStream(outputStream)) {
             byte[] bytesIn = new byte[BUFFER_SIZE];
             int read = 0;
             while ((read = zipIn.read(bytesIn)) != -1) {
@@ -154,7 +178,6 @@ public class ZipTests {
      *
      * @param filePathList 文件路径列表结果
      * @param path         路径
-     * @return zip文件路径列表
      */
     public static void getFilePathList(List<String> filePathList, File path) {
         if (path.isDirectory()) {
