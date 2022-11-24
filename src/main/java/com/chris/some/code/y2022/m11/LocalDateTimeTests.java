@@ -2,6 +2,7 @@ package com.chris.some.code.y2022.m11;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
@@ -28,5 +29,8 @@ public class LocalDateTimeTests {
         LocalDate with = parse4.with(TemporalAdjusters.lastDayOfMonth());
         System.out.println("with = " + with);
         System.out.println(parse4.compareTo(with));
+
+        String format1 = YearMonth.parse("2022-10-30", DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        System.out.println("format1 = " + format1);
     }
 }
