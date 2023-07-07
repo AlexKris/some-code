@@ -57,7 +57,7 @@ public class RsaUtil {
      * @param data         加密前的字符串
      * @param publicKeyStr base64编码后的公钥
      * @return base64编码后的字符串
-     * @throws Exception
+     * @throws Exception 异常
      */
     public static String encryptByPublicKey(String data, String publicKeyStr) throws Exception {
         //Java原生base64解码
@@ -84,7 +84,7 @@ public class RsaUtil {
      * @param data          解密前的字符串
      * @param privateKeyStr 私钥
      * @return 解密后的字符串
-     * @throws Exception
+     * @throws Exception 异常
      */
     public static String decryptByPrivateKey(String data, String privateKeyStr) throws Exception {
         //Java原生base64解码
@@ -111,7 +111,7 @@ public class RsaUtil {
      * @param data          加密前的字符串
      * @param privateKeyStr base64编码后的私钥
      * @return base64编码后后的字符串
-     * @throws Exception
+     * @throws Exception 异常
      */
     public static String encryptByPrivateKey(String data, String privateKeyStr) throws Exception {
         //Java原生base64解码
@@ -138,7 +138,7 @@ public class RsaUtil {
      * @param data         解密前的字符串
      * @param publicKeyStr base64编码后的公钥
      * @return 解密后的字符串
-     * @throws Exception
+     * @throws Exception 异常
      */
     public static String decryptByPublicKey(String data, String publicKeyStr) throws Exception {
         //Java原生base64解码
@@ -166,7 +166,7 @@ public class RsaUtil {
      * @param priKey   私钥
      * @param signType RSA或RSA2
      * @return 签名
-     * @throws Exception
+     * @throws Exception 异常
      */
     public static String sign(byte[] data, byte[] priKey, String signType) throws Exception {
         //创建PKCS8编码密钥规范
