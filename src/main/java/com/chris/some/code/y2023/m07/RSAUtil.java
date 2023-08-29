@@ -8,7 +8,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RsaUtil {
+public class RSAUtil {
 
     /**
      * 签名算法名称
