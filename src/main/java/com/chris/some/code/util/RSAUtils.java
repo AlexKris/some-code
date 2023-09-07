@@ -1,4 +1,4 @@
-package com.chris.some.code.y2023.m07;
+package com.chris.some.code.util;
 
 import javax.crypto.Cipher;
 import java.security.*;
@@ -8,7 +8,13 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RSAUtil {
+/**
+ * RSA加解密
+ *
+ * @author grt
+ * @since 2023-07-07
+ */
+public class RSAUtils {
 
     /**
      * 签名算法名称
@@ -38,11 +44,11 @@ public class RSAUtil {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("RSA初始化密钥出现错误,算法异常");
         }
-        SecureRandom secrand = new SecureRandom();
+        SecureRandom random = new SecureRandom();
         // 初始化随机产生器
-        secrand.setSeed("Alian".getBytes());
+        random.setSeed("bjBank".getBytes());
         // 初始化密钥生成器
-        keygen.initialize(KEY_SIZE, secrand);
+        keygen.initialize(KEY_SIZE, random);
         KeyPair keyPair = keygen.genKeyPair();
         // 获取公钥并转成base64编码
         byte[] pub_key = keyPair.getPublic().getEncoded();
