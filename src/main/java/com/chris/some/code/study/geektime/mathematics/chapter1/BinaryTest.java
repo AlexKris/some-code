@@ -45,7 +45,7 @@ import java.math.BigInteger;
  * </pre>
  *
  * @author chris
- * @since 2023-09-20 25:21
+ * @since 2023-09-20 15:21
  */
 public class BinaryTest {
 
