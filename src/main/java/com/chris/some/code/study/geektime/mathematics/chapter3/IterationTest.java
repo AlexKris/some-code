@@ -22,6 +22,7 @@ package com.chris.some.code.study.geektime.mathematics.chapter3;
 public class IterationTest {
 
     public static void main(String[] args) {
+        // 计算到第 64 格，会超过 long 精度
         System.out.printf("舍罕王给了这么多粒：%d%n", getNumberOfWheat(63));
     }
 
