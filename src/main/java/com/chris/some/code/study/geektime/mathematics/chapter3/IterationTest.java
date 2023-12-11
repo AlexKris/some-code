@@ -71,7 +71,7 @@ public class IterationTest {
      * @param grid 格子数
      * @return {@link long} 麦粒总数
      */
-    private static long getNumberOfWheat(int grid) {
+    public static long getNumberOfWheat(int grid) {
         // 麦粒总数
         long sum = 0;
         // 当前格子麦粒数
@@ -98,7 +98,7 @@ public class IterationTest {
      * @param maxTry         二分查找的最大次数
      * @return {@link double} 平方根的解
      */
-    private static double getSquareRoot(int n, double deltaThreshold, int maxTry) {
+    public static double getSquareRoot(int n, double deltaThreshold, int maxTry) {
         if (n <= 1) {
             return -1.0;
         }
@@ -129,7 +129,7 @@ public class IterationTest {
      * @param wordToFind 待查单词
      * @return {@link boolean} 是否发现待查单词
      */
-    private static boolean searchDict(String[] dictionary, String wordToFind) {
+    public static boolean searchDict(String[] dictionary, String wordToFind) {
         if (dictionary == null) {
             return false;
         }
