@@ -1,8 +1,7 @@
 package com.chris.some.code.y2021.m03.d05;
 
-import sun.misc.BASE64Decoder;
-
 import java.io.*;
+import java.util.Base64;
 
 public class Base64ToImageTest {
 
@@ -16,12 +15,11 @@ public class Base64ToImageTest {
     // 对字节数组字符串进行Base64解码并生成图片
     public static boolean GenerateImage(String imgStr) {
         // 图像数据为空
-        if (imgStr == null)
-            return false;
-        BASE64Decoder decoder = new BASE64Decoder();
+        if (imgStr == null) return false;
+        Base64.Decoder decoder = Base64.getDecoder();
         try {
             // Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);
+            byte[] b = decoder.decode(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 // 调整异常数据
                 if (b[i] < 0) {
